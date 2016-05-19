@@ -1,6 +1,8 @@
 # weatherwatch
 Website based on information from OpenWeatherMap.org 
 
+Created starter project from https://start.spring.io/
+
 Using ~/.weatherwatch/weatherwatch.properties to hold sensitive data.
 
 Signed up to OpenWeatherMap.org and generated an API Key, placed in weatherwatch.properties along with proxy details
@@ -41,3 +43,8 @@ Testing error output with cURL:
 
 
 I've captured these results as "london.json" and "error.json" in src/test/resources
+
+
+In the `WeatherResult` JSON objects I've used `long` for time stamps as you won't mistake `0L` for a real time stamp, but for temperature and pressure I'm using `Double` and `Integer` to avoid confusion when values are missing. 
+
+I've left temperature in Kelvin at this stage and intend to map to Fahrenheit and Celsius at the presentation stage. 
