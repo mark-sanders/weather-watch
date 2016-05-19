@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WeatherwatchApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WeatherwatchApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WeatherwatchApplication.class, args);
+    }
 }
