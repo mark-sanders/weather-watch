@@ -5,8 +5,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,8 +15,6 @@ import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 public class RestfulCallsTest {
 
-    // epsilon error value for comparing doubles
-    private static final double EPSILON = 0.00001;
     private static final String WIREMOCKURL = "http://localhost:8080";
     private static final String GOOD_API_KEY = "&appid=0123456789abcdeffedcba9876543210";
     private static final String BAD_API_KEY =  "&appid=99999999999999999999999999999999";

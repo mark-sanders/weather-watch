@@ -1,10 +1,10 @@
 package com.github.marksanders.weatherwatch.api;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public class JsonMappingTest {
         assertEquals("broken clouds", weather.getDescription());
         assertEquals("04d", weather.getIcon());
 
-        WeatherSys sys = weatherResult.getSys();
+        WeatherDetails sys = weatherResult.getDetails();
         assertNotNull("Expecting sys", sys);
         assertEquals("GB", sys.getCountry());
         assertEquals(1463630501L, sys.getSunrise());
@@ -56,13 +56,5 @@ public class JsonMappingTest {
         assertEquals(55, main.getHumidity().intValue());
         assertEquals(288.95, main.getTempMin().doubleValue(), EPSILON);
         assertEquals(292.59, main.getTempMax().doubleValue(), EPSILON);
-
-        // check weather property short cut works
-        weatherResult.setWeatherList(new ArrayList<>());
-        assertNull("Expecting no weather detail", weatherResult.getWeather());
-
-        weatherResult.setWeatherList(null);
-        assertNull("Expecting no weather detail", weatherResult.getWeather());
-
     }
 }

@@ -23,19 +23,11 @@ public class WeatherMain {
     private Double tempMax;
 
     /**
-     * Get the temperature in Kelvin
+     * Get the temperature in degrees Kelvin
      * @return the temperature
      */
     public Double getTemp() {
         return temp;
-    }
-
-    /**
-     * Set the temperature in Kelvin
-     * @param temp the new temperature
-     */
-    public void setTemp(Double temp) {
-        this.temp = temp;
     }
 
     /**
@@ -47,14 +39,6 @@ public class WeatherMain {
     }
 
     /**
-     * Set the atmospheric pressure in hPa
-     * @param pressure the new pressure
-     */
-    public void setPressure(Integer pressure) {
-        this.pressure = pressure;
-    }
-
-    /**
      * Get the percentage humidity
      * @return the humidity
      */
@@ -63,15 +47,7 @@ public class WeatherMain {
     }
 
     /**
-     * Set the percentage humidity
-     * @param humidity the new humidity
-     */
-    public void setHumidity(Integer humidity) {
-        this.humidity = humidity;
-    }
-
-    /**
-     * Get the minimum temperature in Kelvin
+     * Get the minimum temperature in degrees Kelvin
      * @return the minimum temperature
      */
     public Double getTempMin() {
@@ -79,27 +55,10 @@ public class WeatherMain {
     }
 
     /**
-     * Set the minimum temperature in Kelvin
-     * @param temp the new minimum temperature
-     */
-    public void setTempMin(Double tempMin) {
-        this.tempMin = tempMin;
-    }
-
-    /**
-     * Get the minimum temperature in Kelvin
+     * Get the minimum temperature in degrees Kelvin
      * @return the minimum temperature
      */
     public Double getTempMax() {
         return tempMax;
     }
-
-    /**
-     * Set the maximum temperature in Kelvin
-     * @param temp the new maximum temperature
-     */
-    public void setTempMax(Double tempMax) {
-        this.tempMax = tempMax;
-    }
-
 }

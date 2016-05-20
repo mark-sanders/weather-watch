@@ -22,14 +22,6 @@ public class Weather {
     }
 
     /**
-     * Set the group of weather parameters
-     * @param main the new group of weather parameters
-     */
-    public void setMain(String main) {
-        this.main = main;
-    }
-
-    /**
      * Get the description of the weather
      * @return the weather description
      */
@@ -38,26 +30,10 @@ public class Weather {
     }
 
     /**
-     * Set the description of the weather
-     * @param description the new weather description
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
      * Get the icon code 
      * @return the icon code
      */
     public String getIcon() {
         return icon;
-    }
-
-    /**
-     * Set the icon code 
-     * @param icon the new icon code
-     */
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 }

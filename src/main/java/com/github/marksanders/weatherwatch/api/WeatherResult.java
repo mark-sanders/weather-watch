@@ -28,9 +28,42 @@ public class WeatherResult {
     @JsonProperty("weather")
     private List<Weather> weatherList = new ArrayList<>();
     
-    private WeatherSys sys;
+    @JsonProperty("sys")
+    private WeatherDetails details;
 
     private WeatherMain main;
+    
+    /**
+     * Default constructor for weather result. 
+     */
+    public WeatherResult() {
+        // empty default constructor
+    }
+    
+    /**
+     * Constructor for testing the weather result.
+     * @param name the city name
+     * @param id the city id
+     * @param timestamp the timestamp in Unix UTC format
+     * @param weatherList the list of weather items
+     * @param details
+     * @param main
+     */
+    public WeatherResult(
+            final String name, 
+            final int id, 
+            final long timestamp, 
+            final List<Weather> weatherList, 
+            final WeatherDetails details,
+            final WeatherMain main) {
+        this.name = name;
+        this.id = id;
+        this.timestamp = timestamp;
+        this.weatherList = weatherList;
+        this.details = details;
+        this.main = main;
+    }
+    
 
     /**
      * Get the city name
@@ -41,59 +74,27 @@ public class WeatherResult {
     }
 
     /**
-     * Set the city name
-     * @param name the new city name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    /**
      * Get the city ID 
      * @return the city ID
      */
     public int getId() {
         return id;
     }
-    
-    /**
-     * Set the city ID
-     * @param id the new city ID
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
-     * Get the timestamp in in Unix UTC format
+     * Get the timestamp in Unix UTC format
      * @return the timestamp
      */
     public long getTimestamp() {
         return timestamp;
     }
     
-    /**
-     * Set the timestamp in in Unix UTC format
-     * @param timestamp
-     */
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     /** 
      * Get the list of {@link Weather} items
      * @return the list of weather items
      */
     public List<Weather> getWeatherList() {
         return weatherList;
-    }
-    
-    /**
-     * Get the list of {@link Weather} items
-     * @param weatherList the list of weather items
-     */
-    public void setWeatherList(List<Weather> weatherList) {
-        this.weatherList = weatherList;
     }
 
     /**
@@ -109,22 +110,18 @@ public class WeatherResult {
     }
 
     /**
-     * 
+     * Get the internal details of the weather result. 
+     * @return the details
+     */
+    public WeatherDetails getDetails() {
+        return details;
+    }
+
+    /**
+     * Get the main weather details.
      * @return
      */
-    public WeatherSys getSys() {
-        return sys;
-    }
-    
-    public void setSys(WeatherSys sys) {
-        this.sys = sys;
-    }
-
     public WeatherMain getMain() {
         return main;
-    }
-
-    public void setMain(WeatherMain main) {
-        this.main = main;
     }
 }
