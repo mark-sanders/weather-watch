@@ -2,6 +2,6 @@ package com.github.marksanders.weatherwatch.service;
 
 import com.github.marksanders.weatherwatch.api.WeatherResultJson;
 
-public interface WeatherService {
+public interface OpenWeatherMapService {
     WeatherResultJson getWeatherForCity(int cityId);
 }

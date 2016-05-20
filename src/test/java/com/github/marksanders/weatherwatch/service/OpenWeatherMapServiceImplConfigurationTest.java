@@ -19,10 +19,10 @@ import com.github.marksanders.weatherwatch.WeatherwatchApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WeatherwatchApplication.class)
 @WebAppConfiguration
-public class WeatherServiceImplConfigurationTest {
+public class OpenWeatherMapServiceImplConfigurationTest {
     
     @Resource
-    private WeatherServiceImpl weatherService;
+    private OpenWeatherMapServiceImpl weatherService;
 
     @Test
     public void testWeatherService() {

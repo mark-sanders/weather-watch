@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.github.marksanders.weatherwatch.api.WeatherResultJson;
 
 @Service
-public class WeatherServiceImpl implements WeatherService {
+public class OpenWeatherMapServiceImpl implements OpenWeatherMapService {
     
     private static final String APPID_PARAM = "appid";
 

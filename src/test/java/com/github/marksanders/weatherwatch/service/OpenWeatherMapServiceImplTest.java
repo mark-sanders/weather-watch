@@ -16,7 +16,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import com.github.marksanders.weatherwatch.api.WeatherResultJson;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
-public class WeatherServiceImplTest {
+public class OpenWeatherMapServiceImplTest {
     private static final String WIREMOCKURL = "http://localhost:8080";
     private static final String API_KEY = "0123456789abcdeffedcba9876543210";
     private static final String BAD_API_KEY =  "99999999999999999999999999999999";
@@ -29,7 +29,7 @@ public class WeatherServiceImplTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private WeatherServiceImpl uut = new WeatherServiceImpl();
+    private OpenWeatherMapServiceImpl uut = new OpenWeatherMapServiceImpl();
 
     @Before
     public void setup() {
