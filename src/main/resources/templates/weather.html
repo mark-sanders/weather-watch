@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Weather Watch</title>
+</head>
+<body>
+    <form action="#" th:action="@{/weather}" th:object="${weatherForm}" method="post">
+        <label for="selectCity">Select city:</label>
+        <select th:field="*{cityId}" id="selectCity">
+            <option th:each="city : ${cities}"
+                th:selected="${city.value} == *{cityId}" 
+                th:value="${city.value}" 
+                th:text="${city.key}">City</option>
+        </select>
+        <button type="submit" name="search">Search</button>
+    </form>
+    <hr/>
+    <table th:if="${weather}">
+        <tbody>
+            <tr>
+                <td th:text="|Today's Date (in ${weather.cityName})|" >Today's Date (in City)</td>
+                <td th:text="${weather.date}">20 May 2016</td> 
+            </tr>
+            <tr>
+                <td>City</td>
+                <td th:text="${weather.cityName}">44</td> 
+            </tr>
+            <tr>
+                <td>Weather</td>
+                <td th:text="${#strings.capitalize(weather.description)}">Little fluffy clouds</td> 
+            </tr>
+            <tr>
+                <td>Temperature (&deg;F)</td>
+                <td th:text="|${weather.temperature.fahrenheit}&deg;F|">44</td> 
+            </tr>
+            <tr>
+                <td>Temperature (&deg;C)</td>
+                <td th:text="|${weather.temperature.celsius}&deg;C|">16</td> 
+            </tr>
+            <tr>
+                <td>Sunrise</td>
+                <td th:text="${#strings.toLowerCase(weather.sunrise)}">6:44am</td> 
+            </tr>
+            <tr>
+                <td>Sunset</td>
+                <td th:text="${#strings.toLowerCase(weather.sunset)}">21:05pm</td> 
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
