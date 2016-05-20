@@ -10,7 +10,6 @@ Signed up to OpenWeatherMap.org and generated an API Key, placed in weatherwatch
     weatherwatch.api.key=0123456789abcdeffedcba9876543210
     weatherwatch.http.proxyHost=proxy.example.org
     weatherwatch.http.proxyPort=8080
-    weatherwatch.http.proxyPort
 
 City list accessed from: http://bulk.openweathermap.org/sample/city.list.json.gz
 
@@ -69,17 +68,20 @@ OpenWeatherMap.org suggests that we only send requests every ten minutes so we n
 > but only after 10 min. Also we recommend to store your previous request data
 
 
-
 ## TO DO
-- Cache/orchestration layer to add timezone data and limit calls to every ten minutes at a time
+- Cache/orchestration layer to add timezone data and limit calls to every ten minutes at a time - DONE
 
-- presentation layer
+- presentation layer - DONE
 
 - Time Zones!
-  - today's date in the city time zone
-  - Show sunset and sunrise in the city time zone
-  - Give user the option to show these in their local time zone
-  
+  - today's date in the city time zone - DONE
+  - Show sunset and sunrise in the city time zone - DONE
+  - Give user the option to show these in their local time zone - TODO
+
+- Additional web-level tests including integration tests to show that the cache is doing its work
+
+- Its ugly and not static - use Bootstrap to make it pretty and JavaScript to make it dynamic
+
 ## Links
 [WebJars](http://www.webjars.org/)
 
