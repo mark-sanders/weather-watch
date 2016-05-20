@@ -14,13 +14,13 @@ public class WeatherResultTest {
     @Test
     public void testWeatherMethod() {
         
-        Weather weather1 = new Weather();
-        Weather weather2 = new Weather();
-        Weather weather3 = new Weather();
-        List<Weather> weatherList = Arrays.asList(weather1, weather2, weather3);
+        WeatherJson weather1 = new WeatherJson();
+        WeatherJson weather2 = new WeatherJson();
+        WeatherJson weather3 = new WeatherJson();
+        List<WeatherJson> weatherList = Arrays.asList(weather1, weather2, weather3);
 
-        WeatherResult weatherResult = 
-                new WeatherResult("city", 123456, System.currentTimeMillis(), weatherList, null, null);
+        WeatherResultJson weatherResult = 
+                new WeatherResultJson("city", 123456, System.currentTimeMillis(), weatherList, null, null);
         
         assertEquals("Expecting no weather detail", weather1, weatherResult.getWeather());
     }
@@ -28,8 +28,8 @@ public class WeatherResultTest {
     @Test
     public void testWeatherMethodEmptyList() {
         
-        WeatherResult weatherResult = 
-                new WeatherResult("city", 123456, System.currentTimeMillis(), Collections.emptyList(), null, null);
+        WeatherResultJson weatherResult = 
+                new WeatherResultJson("city", 123456, System.currentTimeMillis(), Collections.emptyList(), null, null);
 
         assertNull("Expecting no weather detail", weatherResult.getWeather());
     }
@@ -37,8 +37,8 @@ public class WeatherResultTest {
     @Test
     public void testWeatherMethodNullList() {
         
-        WeatherResult weatherResult = 
-                new WeatherResult("city", 123456, System.currentTimeMillis(), null, null, null);
+        WeatherResultJson weatherResult = 
+                new WeatherResultJson("city", 123456, System.currentTimeMillis(), null, null, null);
 
         assertNull("Expecting no weather detail", weatherResult.getWeather());
     }

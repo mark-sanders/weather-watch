@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author masander
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherMain {
+public class WeatherMainJson {
     
     private Double temp;
 

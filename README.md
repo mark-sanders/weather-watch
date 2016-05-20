@@ -12,7 +12,7 @@ Signed up to OpenWeatherMap.org and generated an API Key, placed in weatherwatch
     weatherwatch.http.proxyPort=8080
     weatherwatch.http.proxyPort
 
-City list accessed from: <http://bulk.openweathermap.org/sample/city.list.json.gz>
+City list accessed from: http://bulk.openweathermap.org/sample/city.list.json.gz
 
     ...
     {"_id":2643743,"name":"London","country":"GB","coord":{"lon":-0.12574,"lat":51.50853}}
@@ -49,6 +49,12 @@ In the `WeatherResult` JSON objects I've used `long` for time stamps as you won'
 
 I've left temperature in Kelvin at this stage and intend to map to Fahrenheit and Celsius at the presentation stage. 
 
+See https://en.wikipedia.org/wiki/Kelvin
+
+    degreesCelsius = degreesKelvin - 273.15
+    degreesFahrenheit = (degreesKelvin * 9.0 / 5.0) - 459.67
+
+
 OpenWeatherMap.org suggests that we only send requests every ten minutes so we need to do some *caching* 
 
 > **How to get accurate API response**
@@ -82,3 +88,6 @@ and a [WebJar for weather-icons](https://github.com/webjars/weather-icons)
 
 [Bootswatch](http://bootswatch.com/) and a [WebJar for bootswatch](https://github.com/webjars/bootswatch)
 
+[Using SVG | CSS-Tricks](https://css-tricks.com/using-svg/)
+
+[Spring resource handling - Bower, less.js](https://github.com/bclozel/spring-resource-handling/blob/master/README.md)

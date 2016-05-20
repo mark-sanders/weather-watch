@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author masander
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Weather {
+public class WeatherJson {
 
     private String main;
     private String description;

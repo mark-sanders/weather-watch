@@ -23,7 +23,7 @@ public class JsonMappingTest {
         File file = new File(classLoader.getResource("__files/london.json").getFile());
         
         ObjectMapper mapper = new ObjectMapper();
-        WeatherResult weatherResult = mapper.readValue(file, WeatherResult.class);
+        WeatherResultJson weatherResult = mapper.readValue(file, WeatherResultJson.class);
         assertNotNull("Expecting weather result", weatherResult);
         assertEquals("check name", "London", weatherResult.getName());
         assertEquals("check id", 2643743, weatherResult.getId());
@@ -37,19 +37,19 @@ public class JsonMappingTest {
         // check weather property convenience method works
         assertEquals(weatherResult.getWeatherList().get(0), weatherResult.getWeather());
 
-        Weather weather = weatherResult.getWeather();
+        WeatherJson weather = weatherResult.getWeather();
         assertNotNull("Expecting weather detail", weather);
         assertEquals("Clouds", weather.getMain());
         assertEquals("broken clouds", weather.getDescription());
         assertEquals("04d", weather.getIcon());
 
-        WeatherDetails sys = weatherResult.getDetails();
+        WeatherDetailsJson sys = weatherResult.getDetails();
         assertNotNull("Expecting sys", sys);
         assertEquals("GB", sys.getCountry());
         assertEquals(1463630501L, sys.getSunrise());
         assertEquals(1463687600L, sys.getSunset());
 
-        WeatherMain main = weatherResult.getMain();
+        WeatherMainJson main = weatherResult.getMain();
         assertNotNull("Expecting main weather", main);
         assertEquals(290.93, main.getTemp().doubleValue(), EPSILON);
         assertEquals(1012, main.getPressure().intValue());

@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author masander
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherResult {
+public class WeatherResultJson {
 
     private String name;
     
@@ -26,17 +26,17 @@ public class WeatherResult {
     private long timestamp;
 
     @JsonProperty("weather")
-    private List<Weather> weatherList = new ArrayList<>();
+    private List<WeatherJson> weatherList = new ArrayList<>();
     
     @JsonProperty("sys")
-    private WeatherDetails details;
+    private WeatherDetailsJson details;
 
-    private WeatherMain main;
+    private WeatherMainJson main;
     
     /**
      * Default constructor for weather result. 
      */
-    public WeatherResult() {
+    public WeatherResultJson() {
         // empty default constructor
     }
     
@@ -49,13 +49,13 @@ public class WeatherResult {
      * @param details
      * @param main
      */
-    public WeatherResult(
+    public WeatherResultJson(
             final String name, 
             final int id, 
             final long timestamp, 
-            final List<Weather> weatherList, 
-            final WeatherDetails details,
-            final WeatherMain main) {
+            final List<WeatherJson> weatherList, 
+            final WeatherDetailsJson details,
+            final WeatherMainJson main) {
         this.name = name;
         this.id = id;
         this.timestamp = timestamp;
@@ -90,18 +90,18 @@ public class WeatherResult {
     }
     
     /** 
-     * Get the list of {@link Weather} items
+     * Get the list of {@link WeatherJson} items
      * @return the list of weather items
      */
-    public List<Weather> getWeatherList() {
+    public List<WeatherJson> getWeatherList() {
         return weatherList;
     }
 
     /**
-     * Convenience method to return the expected single {@link Weather} item
+     * Convenience method to return the expected single {@link WeatherJson} item
      * @return the weather item or null if this list is empty 
      */
-    public Weather getWeather() {
+    public WeatherJson getWeather() {
         if (CollectionUtils.isEmpty(this.weatherList)) {
             return null; 
         } else {
@@ -113,7 +113,7 @@ public class WeatherResult {
      * Get the internal details of the weather result. 
      * @return the details
      */
-    public WeatherDetails getDetails() {
+    public WeatherDetailsJson getDetails() {
         return details;
     }
 
@@ -121,7 +121,7 @@ public class WeatherResult {
      * Get the main weather details.
      * @return
      */
-    public WeatherMain getMain() {
+    public WeatherMainJson getMain() {
         return main;
     }
 }

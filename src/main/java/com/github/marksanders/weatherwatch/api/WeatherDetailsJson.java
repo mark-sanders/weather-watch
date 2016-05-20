@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherDetails {
+public class WeatherDetailsJson {
     // ignoring type
     // ignoring id
     // ignoring message

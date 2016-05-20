@@ -1,4 +1,4 @@
-package com.github.marksanders.weatherwatch.api;
+package com.github.marksanders.weatherwatch.service;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
@@ -6,32 +6,38 @@ import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
+import com.github.marksanders.weatherwatch.api.WeatherResultJson;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
-public class RestfulCallsTest {
-
-    private static final String API_KEY = "0123456789abcdeffedcba9876543210";
+public class WeatherServiceImplTest {
     private static final String WIREMOCKURL = "http://localhost:8080";
-    private static final String GOOD_API_KEY = "&appid=" + API_KEY;
-    private static final String BAD_API_KEY =  "&appid=999";
+    private static final String API_KEY = "0123456789abcdeffedcba9876543210";
+    private static final String BAD_API_KEY =  "99999999999999999999999999999999";
 
     private static final String GET_WEATHER = "/data/2.5/weather";
-    private static final String GET_LONDON_WEATHER_PATH = GET_WEATHER + "?id=2643743";
-    private static final String GET_HONG_KONG_WEATHER_PATH = GET_WEATHER + "?id=1819729";
-    private static final String GET_UNKNOWN_WEATHER_PATH = GET_WEATHER + "?id=999999";
 
     @Rule
     public WireMockRule wireMock = new WireMockRule();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
+
+    private WeatherServiceImpl uut = new WeatherServiceImpl();
+
+    @Before
+    public void setup() {
+        uut.setRequestFactory(new SimpleClientHttpRequestFactory());
+        uut.setWeatherwatchUrl(WIREMOCKURL + GET_WEATHER);
+        uut.setApiKey(API_KEY);
+        
+    }
 
     @Test
     public void testLondonWeather() {
@@ -43,8 +49,8 @@ public class RestfulCallsTest {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBodyFile("london.json")));
 
-        RestTemplate restTemplate = new RestTemplate();
-        WeatherResultJson weatherResult = restTemplate.getForObject(WIREMOCKURL + GET_LONDON_WEATHER_PATH + GOOD_API_KEY, WeatherResultJson.class);
+        WeatherResultJson weatherResult = uut.getWeatherForCity(2643743);
+
         assertNotNull("Expecting weather result", weatherResult);
         assertEquals("check name", "London", weatherResult.getName());
         assertEquals("check id", 2643743, weatherResult.getId());
@@ -60,8 +66,8 @@ public class RestfulCallsTest {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBodyFile("hong-kong.json")));
 
-        RestTemplate restTemplate = new RestTemplate();
-        WeatherResultJson weatherResult = restTemplate.getForObject(WIREMOCKURL + GET_HONG_KONG_WEATHER_PATH + GOOD_API_KEY, WeatherResultJson.class);
+        WeatherResultJson weatherResult = uut.getWeatherForCity(1819729);
+
         assertNotNull("Expecting weather result", weatherResult);
         assertEquals("check name", "Hong Kong", weatherResult.getName());
         assertEquals("check id", 1819729, weatherResult.getId());
@@ -72,7 +78,7 @@ public class RestfulCallsTest {
         wireMock.stubFor(
                 get(urlPathEqualTo(GET_WEATHER))
                         .withQueryParam("id", equalTo("2643743"))
-                        .withQueryParam("appid", equalTo("999"))
+                        .withQueryParam("appid", equalTo(BAD_API_KEY))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withStatus(401)
@@ -81,8 +87,8 @@ public class RestfulCallsTest {
         thrown.expect(HttpClientErrorException.class);
         thrown.expectMessage("401 Unauthorized");
 
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getForObject(WIREMOCKURL + GET_LONDON_WEATHER_PATH + BAD_API_KEY, WeatherResultJson.class);
+        uut.setApiKey(BAD_API_KEY);
+        uut.getWeatherForCity(2643743);
     }
 
     @Test
@@ -96,10 +102,10 @@ public class RestfulCallsTest {
                         .withStatus(404)
                         .withBodyFile("not-found.json")));
         
+        
         thrown.expect(HttpClientErrorException.class);
         thrown.expectMessage("404 Not Found");
 
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getForObject(WIREMOCKURL + GET_UNKNOWN_WEATHER_PATH + GOOD_API_KEY, WeatherResultJson.class);
+        uut.getWeatherForCity(999999);
     }
 }
