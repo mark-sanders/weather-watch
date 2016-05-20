@@ -12,7 +12,7 @@ Signed up to OpenWeatherMap.org and generated an API Key, placed in weatherwatch
     weatherwatch.http.proxyPort=8080
     weatherwatch.http.proxyPort
 
-City list accessed from: http://bulk.openweathermap.org/sample/city.list.json.gz
+City list accessed from: <http://bulk.openweathermap.org/sample/city.list.json.gz>
 
     ...
     {"_id":2643743,"name":"London","country":"GB","coord":{"lon":-0.12574,"lat":51.50853}}
@@ -48,3 +48,37 @@ I've captured these results as "london.json" and "error.json" in src/test/resour
 In the `WeatherResult` JSON objects I've used `long` for time stamps as you won't mistake `0L` for a real time stamp, but for temperature and pressure I'm using `Double` and `Integer` to avoid confusion when values are missing. 
 
 I've left temperature in Kelvin at this stage and intend to map to Fahrenheit and Celsius at the presentation stage. 
+
+OpenWeatherMap.org suggests that we only send requests every ten minutes so we need to do some *caching* 
+
+> **How to get accurate API response**
+
+> 1 Do not send requests more then 1 time per 10 minutes from one device/one API key. Normally the weather is not changing so frequently.
+
+> 2 Use the name of the server as api.openweathermap.org. Please never use the IP address of the server.
+
+> 3 Call API by city ID instead of city name, city coordinates or zip code. In this case you get precise respond exactly for your city.
+
+> 4 Free account has limitation of capacity and data availability. If you do not get respond from server do not try to repeat your request immediately, 
+> but only after 10 min. Also we recommend to store your previous request data
+
+
+
+## TO DO
+- Cache/orchestration layer to add timezone data and limit calls to every ten minutes at a time
+
+- presentation layer
+
+- Time Zones!
+  - today's date in the city time zone
+  - Show sunset and sunrise in the city time zone
+  - Give user the option to show these in their local time zone
+  
+## Links
+[WebJars](http://www.webjars.org/)
+
+[Weather Icons - 222 font icons inspired by Font Awesome and designed for Bootstrap](https://erikflowers.github.io/weather-icons/)
+and a [WebJar for weather-icons](https://github.com/webjars/weather-icons)
+
+[Bootswatch](http://bootswatch.com/) and a [WebJar for bootswatch](https://github.com/webjars/bootswatch)
+
