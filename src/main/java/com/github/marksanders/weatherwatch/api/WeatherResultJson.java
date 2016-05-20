@@ -22,8 +22,7 @@ public class WeatherResultJson {
     
     private int id;
     
-    @JsonProperty("dt")
-    private long timestamp;
+    private long dt;
 
     @JsonProperty("weather")
     private List<WeatherJson> weatherList = new ArrayList<>();
@@ -52,13 +51,13 @@ public class WeatherResultJson {
     public WeatherResultJson(
             final String name, 
             final int id, 
-            final long timestamp, 
+            final long dt, 
             final List<WeatherJson> weatherList, 
             final WeatherDetailsJson details,
             final WeatherMainJson main) {
         this.name = name;
         this.id = id;
-        this.timestamp = timestamp;
+        this.dt = dt;
         this.weatherList = weatherList;
         this.details = details;
         this.main = main;
@@ -85,8 +84,8 @@ public class WeatherResultJson {
      * Get the timestamp in Unix UTC format
      * @return the timestamp
      */
-    public long getTimestamp() {
-        return timestamp;
+    public long getDt() {
+        return dt;
     }
     
     /** 

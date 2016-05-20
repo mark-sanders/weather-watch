@@ -28,8 +28,7 @@ public class JsonMappingTest {
         assertEquals("check name", "London", weatherResult.getName());
         assertEquals("check id", 2643743, weatherResult.getId());
         
-        assertNotNull("check timestamp provided", weatherResult.getTimestamp());
-        assertEquals("check timestamp", 1463675149L, weatherResult.getTimestamp());
+        assertEquals("check timestamp", 1463675149L, weatherResult.getDt());
         
         assertNotNull("Expecting weather details", weatherResult.getWeatherList());
         assertEquals("Expecting single weather detail", 1, weatherResult.getWeatherList().size());

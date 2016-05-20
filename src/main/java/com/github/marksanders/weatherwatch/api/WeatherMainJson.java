@@ -23,6 +23,35 @@ public class WeatherMainJson {
     private Double tempMax;
 
     /**
+     * Default constructor for the main weather details (for JSON). 
+     */
+    public WeatherMainJson() {
+    }
+    
+    /**
+     * Create the main weather details (for testing).
+     * @param temp the temperature in Kelvin
+     * @param pressure atmospheric pressure in hPa
+     * @param humidity the percentage humidity
+     * @param tempMin the mininum temperature in Kelvin
+     * @param tempMax the maxinum temperature in Kelvin
+     */
+    public WeatherMainJson(
+            final Double temp, 
+            final Integer pressure, 
+            final Integer humidity, 
+            final Double tempMin, 
+            final Double tempMax) {
+        this.temp = temp;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.tempMin = tempMin;
+        this.tempMax = tempMax;
+    }
+
+
+
+    /**
      * Get the temperature in degrees Kelvin
      * @return the temperature
      */
