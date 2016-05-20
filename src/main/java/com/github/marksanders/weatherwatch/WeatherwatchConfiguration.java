@@ -22,7 +22,7 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 @EnableCaching
 public class WeatherwatchConfiguration {
     
-    @Value("${weatherwatch.http.proxyHost:null}")
+    @Value("${weatherwatch.http.proxyHost:#{null}}")
     private String proxyHost;
     
     @Value("${weatherwatch.http.proxyPort:0}")
