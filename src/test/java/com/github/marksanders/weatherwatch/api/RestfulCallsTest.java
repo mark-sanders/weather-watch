@@ -46,7 +46,7 @@ public class RestfulCallsTest {
         WeatherResult weatherResult = restTemplate.getForObject(WIREMOCKURL + GET_LONDON_WEATHER_PATH + GOOD_API_KEY, WeatherResult.class);
         assertNotNull("Expecting weather result", weatherResult);
         assertEquals("check name", "London", weatherResult.getName());
-        assertEquals("check timestamp", 1463675149L, weatherResult.getTimestamp());
+        assertEquals("check id", 2643743, weatherResult.getId());
    }
 
     @Test
@@ -57,10 +57,10 @@ public class RestfulCallsTest {
                         .withBodyFile("hong-kong.json")));
 
         RestTemplate restTemplate = new RestTemplate();
-        WeatherResult weather = restTemplate.getForObject(WIREMOCKURL + GET_HONG_KONG_WEATHER_PATH + GOOD_API_KEY, WeatherResult.class);
-        assertNotNull("Expecting weather result", weather);
-        assertEquals("check name", "Hong Kong", weather.getName());
-        assertEquals("check timestamp", 1463677208L, weather.getTimestamp());
+        WeatherResult weatherResult = restTemplate.getForObject(WIREMOCKURL + GET_HONG_KONG_WEATHER_PATH + GOOD_API_KEY, WeatherResult.class);
+        assertNotNull("Expecting weather result", weatherResult);
+        assertEquals("check name", "Hong Kong", weatherResult.getName());
+        assertEquals("check id", 1819729, weatherResult.getId());
     }
 
     @Test
