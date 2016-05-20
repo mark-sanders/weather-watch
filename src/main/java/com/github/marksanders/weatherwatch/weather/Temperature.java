@@ -1,4 +1,4 @@
-package com.github.marksanders.weatherwatch.dto;
+package com.github.marksanders.weatherwatch.weather;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -25,12 +25,12 @@ public class Temperature {
         this.kelvin = kelvin;
     }
 
-    public double toCelsius() {
-        return kelvin.subtract(CELSIUS_OFFSET, MC).doubleValue();
+    public int getCelsius() {
+        return kelvin.subtract(CELSIUS_OFFSET, MC).intValue();
     }
     
-    public double toFahrenheit() {
-        return kelvin.multiply(FAHRENHEIT_SCALE, MC).subtract(FAHRENHEIT_OFFSET, MC).doubleValue();
+    public int getFahrenheit() {
+        return kelvin.multiply(FAHRENHEIT_SCALE, MC).subtract(FAHRENHEIT_OFFSET, MC).intValue();
     }
     
     @Override

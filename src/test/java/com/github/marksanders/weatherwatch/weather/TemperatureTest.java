@@ -1,13 +1,13 @@
-package com.github.marksanders.weatherwatch.dto;
+package com.github.marksanders.weatherwatch.weather;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-public class TemperatureTest {
+import com.github.marksanders.weatherwatch.weather.Temperature;
 
-    private static final double EPSILON = 0.00001;
+public class TemperatureTest {
 
     @Test
     public void testEquals() {
@@ -35,8 +35,8 @@ public class TemperatureTest {
         assertEquals(kelvin, celsius);
         assertEquals(kelvin.hashCode(), celsius.hashCode());
         
-        assertEquals(0.0, kelvin.toCelsius(), EPSILON);
-        assertEquals(32.0, kelvin.toFahrenheit(), EPSILON);
+        assertEquals(0, kelvin.getCelsius());
+        assertEquals(32, kelvin.getFahrenheit());
     }
 
     @Test
@@ -47,8 +47,8 @@ public class TemperatureTest {
         assertEquals(kelvin, celsius);
         assertEquals(kelvin.hashCode(), celsius.hashCode());
         
-        assertEquals(100.0, kelvin.toCelsius(), EPSILON);
-        assertEquals(212.0, kelvin.toFahrenheit(), EPSILON);
+        assertEquals(100, kelvin.getCelsius());
+        assertEquals(212, kelvin.getFahrenheit());
     }
 
     @Test

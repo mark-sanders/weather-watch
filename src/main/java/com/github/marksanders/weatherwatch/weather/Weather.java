@@ -1,12 +1,16 @@
-package com.github.marksanders.weatherwatch.dto;
+package com.github.marksanders.weatherwatch.weather;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.core.style.ToStringCreator;
 
 public class Weather {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("h:mma");
 
     private final String cityName;
     private final int cityId;
@@ -44,7 +48,7 @@ public class Weather {
     public ZonedDateTime getCityDateTime() {
         return cityDateTime;
     }
-
+    
     public String getDescription() {
         return description;
     }
@@ -60,6 +64,19 @@ public class Weather {
     public ZonedDateTime getCitySunsetDateTime() {
         return citySunsetDateTime;
     }
+
+    public String getDate() {
+        return DATE_FORMATTER.format(cityDateTime);
+    }
+
+    public String getSunrise() {
+        return TIME_FORMATTER.format(citySunriseDateTime);
+    }
+
+    public String getSunset() {
+        return TIME_FORMATTER.format(citySunsetDateTime);
+    }
+
 
     @Override
     public String toString() {

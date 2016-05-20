@@ -1,4 +1,4 @@
-package com.github.marksanders.weatherwatch.dto;
+package com.github.marksanders.weatherwatch.weather;
 
 
 import static org.junit.Assert.assertEquals;
@@ -11,6 +11,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import org.junit.Test;
+
+import com.github.marksanders.weatherwatch.weather.Temperature;
+import com.github.marksanders.weatherwatch.weather.Weather;
 
 public class WeatherTest {
     
