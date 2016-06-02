@@ -3,14 +3,13 @@ Website based on information from OpenWeatherMap.org
 
 Created starter project from https://start.spring.io/
 
-Using ~/.weatherwatch/weatherwatch.properties to hold sensitive data.
+Using `~/.weatherwatch/weatherwatch.properties` to hold sensitive data, such as API key and proxy details.
 
 Signed up to OpenWeatherMap.org and generated an API Key, placed in weatherwatch.properties along with proxy details
 
     weatherwatch.api.key=0123456789abcdeffedcba9876543210
     weatherwatch.http.proxyHost=proxy.example.org
     weatherwatch.http.proxyPort=8080
-    weatherwatch.http.proxyPort
 
 City list accessed from: http://bulk.openweathermap.org/sample/city.list.json.gz
 
@@ -42,7 +41,7 @@ Testing error output with cURL:
     {"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}
 
 
-I've captured these results as "london.json" and "error.json" in src/test/resources
+I've captured these results as "london.json", "hong-kong.json" and "error.json" in src/test/resources/__files for WireMock to serve.
 
 
 In the `WeatherResult` JSON objects I've used `long` for time stamps as you won't mistake `0L` for a real time stamp, but for temperature and pressure I'm using `Double` and `Integer` to avoid confusion when values are missing. 
@@ -69,17 +68,21 @@ OpenWeatherMap.org suggests that we only send requests every ten minutes so we n
 > but only after 10 min. Also we recommend to store your previous request data
 
 
-
 ## TO DO
-- Cache/orchestration layer to add timezone data and limit calls to every ten minutes at a time
-
-- presentation layer
-
+- Cache/orchestration layer to add timezone data and limit calls to every ten minutes at a time - DONE
+- presentation layer - DONE
 - Time Zones!
-  - today's date in the city time zone
-  - Show sunset and sunrise in the city time zone
-  - Give user the option to show these in their local time zone
-  
+  - today's date in the city time zone - DONE
+  - Show sunset and sunrise in the city time zone - DONE
+  - Give user the option to show these in their local time zone - TODO
+  - implement TimeZoneService to call a web service, e.g. https://developers.google.com/maps/documentation/timezone/intro
+- Additional web-level tests including integration tests to show that the cache is doing its work
+- It is ugly and uses a static interfacec - use Bootstrap to make it pretty and JavaScript to make it dynamic
+  - implement a RESTful web service interface serving JSON, use Angular, do time zone conversion in browser
+- Load and cache city list from OpenWeatherMap.org, type ahead for searching for city, etc.
+- Change `Temperature` to use `double` not `BigDecimal` which is a bit overblown
+- lots more tests required
+
 ## Links
 [WebJars](http://www.webjars.org/)
 
