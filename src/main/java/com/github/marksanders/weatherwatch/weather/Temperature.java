@@ -1,41 +1,43 @@
 package com.github.marksanders.weatherwatch.weather;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
+import java.text.DecimalFormat;
 
 public class Temperature {
+
+    private static final String TEMPERATURE_FORMAT_PATTERN = "#.##";
+
+    private static final ThreadLocal<DecimalFormat> decimalFormat = 
+            new ThreadLocal<DecimalFormat>() {
+                protected DecimalFormat initialValue() {
+                    return new DecimalFormat(TEMPERATURE_FORMAT_PATTERN);
+                };
+            };
     
-    private static final MathContext MC = new MathContext(5);
-    private static final BigDecimal CELSIUS_OFFSET = new BigDecimal(273.15, MC);
-    private static final BigDecimal FAHRENHEIT_SCALE = new BigDecimal(9.0 / 5.0, MC);
-    private static final BigDecimal FAHRENHEIT_OFFSET = new BigDecimal(459.67, MC);
+    private static final double CELSIUS_OFFSET = 273.15;
+    private static final double FAHRENHEIT_SCALE = 9.0 / 5.0;
+    private static final double FAHRENHEIT_OFFSET = 32.0;
     
-    private final BigDecimal kelvin;
+    private final double kelvin;
 
     public static Temperature fromCelsius(double temperatureCelsius) {
-        BigDecimal celsius = new BigDecimal(temperatureCelsius, MC);
-        return new Temperature(celsius.add(CELSIUS_OFFSET, MC));
+        return new Temperature(temperatureCelsius + CELSIUS_OFFSET);
     }
 
     public Temperature(final double kelvin) {
-        this.kelvin = new BigDecimal(kelvin, MC);
-    }
-    
-    private Temperature(final BigDecimal kelvin) {
         this.kelvin = kelvin;
     }
 
     public int getCelsius() {
-        return kelvin.subtract(CELSIUS_OFFSET, MC).intValue();
+        return (int) (kelvin - CELSIUS_OFFSET);
     }
     
     public int getFahrenheit() {
-        return kelvin.multiply(FAHRENHEIT_SCALE, MC).subtract(FAHRENHEIT_OFFSET, MC).intValue();
+        return (int) (((kelvin - CELSIUS_OFFSET) * FAHRENHEIT_SCALE) + FAHRENHEIT_OFFSET);
     }
     
     @Override
     public String toString() {
-        return kelvin.toString();
+        return decimalFormat.get().format(kelvin);
     }
 
     @Override
@@ -45,11 +47,11 @@ public class Temperature {
         }
         
         Temperature other = (Temperature) object;
-        return 0 == kelvin.compareTo(other.kelvin);
+        return toString().equals(other.toString());
     }
 
     @Override
     public int hashCode() {
-        return kelvin.hashCode();
+        return toString().hashCode();
     }
 }

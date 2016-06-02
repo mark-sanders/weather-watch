@@ -1,7 +1,8 @@
 package com.github.marksanders.weatherwatch.weather;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -12,19 +13,25 @@ public class TemperatureTest {
     @Test
     public void testEquals() {
         Temperature current = new Temperature(290.93);
+
         Temperature similar1 = new Temperature(290.931);
         assertEquals("Temperature is compared at two decimal places", current, similar1);
         assertEquals("Temperature is compared at two decimal places", current.hashCode(), similar1.hashCode());
 
         Temperature similar2 = new Temperature(290.929);
-        assertEquals("Temperature is compared at two decimal places", current, similar2);
+        assertTrue("Temperature is compared at two decimal places", current.equals(similar2));
         assertEquals("Temperature is compared at two decimal places", current.hashCode(), similar2.hashCode());
 
         Temperature different1 = new Temperature(288.95);
-        assertNotEquals("Temperature is compared at two decimal places", different1, current);
+        assertFalse("Temperature is compared at two decimal places", current.equals(different1));
 
         Temperature different2 = new Temperature(288.939);
-        assertNotEquals("Temperature is compared at two decimal places", different2, current);
+        assertFalse("Temperature is compared at two decimal places", current.equals(different2));
+
+        Double different3 = new Double(290.93);
+        assertFalse("Temperature equals works with unexpected value", current.equals(different3));
+
+        assertFalse("Temperature equals works with null", current.equals(null));
     }
 
     @Test
