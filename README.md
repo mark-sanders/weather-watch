@@ -74,13 +74,14 @@ OpenWeatherMap.org suggests that we only send requests every ten minutes so we n
 - Time Zones!
   - today's date in the city time zone - DONE
   - Show sunset and sunrise in the city time zone - DONE
-  - Give user the option to show these in their local time zone - TODO
+  - Give user the option to show these in their local time zone
   - implement TimeZoneService to call a web service, e.g. https://developers.google.com/maps/documentation/timezone/intro
 - Additional web-level tests including integration tests to show that the cache is doing its work
-- It is ugly and uses a static interfacec - use Bootstrap to make it pretty and JavaScript to make it dynamic
+- It is ugly and uses a static HTML interface 
+  - use Bootstrap to make it pretty and JavaScript to make it dynamic
   - implement a RESTful web service interface serving JSON, use Angular, do time zone conversion in browser
 - Load and cache city list from OpenWeatherMap.org, type ahead for searching for city, etc.
-- Change `Temperature` to use `double` not `BigDecimal` which is a bit overblown
+- Change `Temperature` to use `double` not `BigDecimal` which is a bit overblown - DONE
 - lots more tests required
 
 ## Links
