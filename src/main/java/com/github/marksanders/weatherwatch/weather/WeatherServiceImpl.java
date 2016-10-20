@@ -1,6 +1,7 @@
 package com.github.marksanders.weatherwatch.weather;
 
 import java.time.ZoneId;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -47,22 +48,22 @@ public class WeatherServiceImpl implements WeatherService {
             throw new IllegalStateException("Failed to find a time zone for a city [" + cityId + "]");
         }
 
-        final WeatherResultJson weatherResultJson = openWeatherMap.getWeatherForCity(cityId);
+        final WeatherResultJson weatherResultJson = openWeatherMap.getWeatherForCity(cityId).get();
         if (weatherResultJson == null) {
             throw new IllegalStateException("Failed to get result for a city [" + cityId + "]");
         }
         
-        final WeatherJson weatherJson = weatherResultJson.getWeather();
+        final WeatherJson weatherJson = weatherResultJson.getWeather().get();
         if (weatherJson == null) {
             throw new IllegalStateException("Failed to get weather for a city [" + cityId + "]");
         }
 
-        final WeatherDetailsJson detailsJson = weatherResultJson.getDetails();
+        final WeatherDetailsJson detailsJson = weatherResultJson.getDetails().get();
         if (detailsJson == null) {
             throw new IllegalStateException("Failed to get weather details for a city [" + cityId + "]");
         }
 
-        final WeatherMainJson mainJson = weatherResultJson.getMain();
+        final WeatherMainJson mainJson = weatherResultJson.getMain().get();
         if (mainJson == null) {
             throw new IllegalStateException("Failed to get main weather for a city [" + cityId + "]");
         }
@@ -80,21 +81,11 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
-    public int getTemperatureForCity(int cityId) {
-        final WeatherResultJson weatherResultJson = openWeatherMap.getWeatherForCity(cityId);
-        if (weatherResultJson != null) {
-            final WeatherJson weatherJson = weatherResultJson.getWeather();
-            if (weatherJson != null) {
-                final WeatherMainJson mainJson = weatherResultJson.getMain();
-                if (mainJson != null) {
-                    Double tempKelvin = mainJson.getTemp();
-                    if (tempKelvin != null) {
-                        return new Temperature(tempKelvin).getCelsius();
-                    }
-                }
-            }
-        }
-
-        throw new IllegalStateException("Failed to get temperature for a city");
+    public Optional<Integer> getTemperatureForCity(int cityId) {
+        
+        return openWeatherMap.getWeatherForCity(cityId)
+                .flatMap(weatherResult -> weatherResult.getMain())
+                .flatMap(main -> main.getTemp())
+                .map(kelvin -> new Temperature(kelvin).getCelsius());
     }
 }

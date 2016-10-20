@@ -49,7 +49,7 @@ public class OpenWeatherMapServiceImplTest {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBodyFile("london.json")));
 
-        WeatherResultJson weatherResult = uut.getWeatherForCity(2643743);
+        WeatherResultJson weatherResult = uut.getWeatherForCity(2643743).get();
 
         assertNotNull("Expecting weather result", weatherResult);
         assertEquals("check name", "London", weatherResult.getName());
@@ -66,7 +66,7 @@ public class OpenWeatherMapServiceImplTest {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBodyFile("hong-kong.json")));
 
-        WeatherResultJson weatherResult = uut.getWeatherForCity(1819729);
+        WeatherResultJson weatherResult = uut.getWeatherForCity(1819729).get();
 
         assertNotNull("Expecting weather result", weatherResult);
         assertEquals("check name", "Hong Kong", weatherResult.getName());

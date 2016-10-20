@@ -1,5 +1,7 @@
 package com.github.marksanders.weatherwatch.api;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,17 +12,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherMainJson {
     
-    private Double temp;
+    @JsonProperty("temp")
+    private Optional<Double> temp;
 
-    private Integer pressure;
+    private Optional<Integer> pressure;
     
-    private Integer humidity;
+    private Optional<Integer> humidity;
 
     @JsonProperty("temp_min")
-    private Double tempMin;
+    private Optional<Double> tempMin;
 
     @JsonProperty("temp_max")
-    private Double tempMax;
+    private Optional<Double> tempMax;
 
     /**
      * Default constructor for the main weather details (for JSON). 
@@ -37,16 +40,16 @@ public class WeatherMainJson {
      * @param tempMax the maxinum temperature in Kelvin
      */
     public WeatherMainJson(
-            final Double temp, 
-            final Integer pressure, 
-            final Integer humidity, 
-            final Double tempMin, 
-            final Double tempMax) {
-        this.temp = temp;
-        this.pressure = pressure;
-        this.humidity = humidity;
-        this.tempMin = tempMin;
-        this.tempMax = tempMax;
+            final double temp, 
+            final int pressure, 
+            final int humidity, 
+            final double tempMin, 
+            final double tempMax) {
+        this.temp = Optional.of(temp);
+        this.pressure = Optional.of(pressure);
+        this.humidity = Optional.of(humidity);
+        this.tempMin = Optional.of(tempMin);
+        this.tempMax = Optional.of(tempMax);
     }
 
 
@@ -55,7 +58,7 @@ public class WeatherMainJson {
      * Get the temperature in degrees Kelvin
      * @return the temperature
      */
-    public Double getTemp() {
+    public Optional<Double> getTemp() {
         return temp;
     }
 
@@ -63,7 +66,7 @@ public class WeatherMainJson {
      * Get the atmospheric pressure in hPa
      * @return the pressure
      */
-    public Integer getPressure() {
+    public Optional<Integer> getPressure() {
         return pressure;
     }
 
@@ -71,7 +74,7 @@ public class WeatherMainJson {
      * Get the percentage humidity
      * @return the humidity
      */
-    public Integer getHumidity() {
+    public Optional<Integer> getHumidity() {
         return humidity;
     }
 
@@ -79,7 +82,7 @@ public class WeatherMainJson {
      * Get the minimum temperature in degrees Kelvin
      * @return the minimum temperature
      */
-    public Double getTempMin() {
+    public Optional<Double> getTempMin() {
         return tempMin;
     }
 
@@ -87,7 +90,7 @@ public class WeatherMainJson {
      * Get the minimum temperature in degrees Kelvin
      * @return the minimum temperature
      */
-    public Double getTempMax() {
+    public Optional<Double> getTempMax() {
         return tempMax;
     }
 }

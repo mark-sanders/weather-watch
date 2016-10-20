@@ -1,7 +1,9 @@
 package com.github.marksanders.weatherwatch.service;
 
+import java.util.Optional;
+
 import com.github.marksanders.weatherwatch.api.WeatherResultJson;
 
 public interface OpenWeatherMapService {
-    WeatherResultJson getWeatherForCity(int cityId);
+    Optional<WeatherResultJson> getWeatherForCity(int cityId);
 }

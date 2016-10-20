@@ -1,6 +1,7 @@
 package com.github.marksanders.weatherwatch.service;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -65,14 +66,15 @@ public class OpenWeatherMapServiceImpl implements OpenWeatherMapService {
     }
 
     @Override
-    public WeatherResultJson getWeatherForCity(int cityId) {
+    public Optional<WeatherResultJson> getWeatherForCity(int cityId) {
         
         final UriComponentsBuilder builder = createUriComponentsBuilder();
         builder.queryParam(CITY_ID_PARAM, cityId);
         final URI uri = builder.build().toUri();
         
         final RestTemplate restTemplate = createRestTemplate();
-        return restTemplate.getForObject(uri, WeatherResultJson.class);
+        final WeatherResultJson weatherResult = restTemplate.getForObject(uri, WeatherResultJson.class);
+        return Optional.ofNullable(weatherResult);
     }
 
 }

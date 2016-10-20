@@ -2,8 +2,7 @@ package com.github.marksanders.weatherwatch.api;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.util.CollectionUtils;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,9 +27,9 @@ public class WeatherResultJson {
     private List<WeatherJson> weatherList = new ArrayList<>();
     
     @JsonProperty("sys")
-    private WeatherDetailsJson details;
+    private Optional<WeatherDetailsJson> details;
 
-    private WeatherMainJson main;
+    private Optional<WeatherMainJson> main;
     
     /**
      * Default constructor for weather result. 
@@ -58,9 +57,12 @@ public class WeatherResultJson {
         this.name = name;
         this.id = id;
         this.dt = dt;
-        this.weatherList = weatherList;
-        this.details = details;
-        this.main = main;
+        if (weatherList != null) {
+            this.weatherList = weatherList;
+        }
+        
+        this.details = Optional.ofNullable(details);
+        this.main = Optional.ofNullable(main);
     }
     
 
@@ -100,19 +102,15 @@ public class WeatherResultJson {
      * Convenience method to return the expected single {@link WeatherJson} item
      * @return the weather item or null if this list is empty 
      */
-    public WeatherJson getWeather() {
-        if (CollectionUtils.isEmpty(this.weatherList)) {
-            return null; 
-        } else {
-            return this.weatherList.get(0);
-        }
+    public Optional<WeatherJson> getWeather() {
+        return weatherList.stream().findFirst();
     }
 
     /**
      * Get the internal details of the weather result. 
      * @return the details
      */
-    public WeatherDetailsJson getDetails() {
+    public Optional<WeatherDetailsJson> getDetails() {
         return details;
     }
 
@@ -120,7 +118,7 @@ public class WeatherResultJson {
      * Get the main weather details.
      * @return
      */
-    public WeatherMainJson getMain() {
+    public Optional<WeatherMainJson> getMain() {
         return main;
     }
 }

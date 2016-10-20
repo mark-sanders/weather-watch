@@ -1,7 +1,9 @@
 package com.github.marksanders.weatherwatch.weather;
 
+import java.util.Optional;
+
 public interface WeatherService {
     Weather getWeatherForCity(int cityId);
 
-    int getTemperatureForCity(int cityId);
+    Optional<Integer> getTemperatureForCity(int cityId);
 }

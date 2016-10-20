@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import org.springframework.core.style.ToStringCreator;
 
@@ -117,13 +118,18 @@ public class Weather {
             return this;
         }
 
-        public Builder temperatureKelvin(final double temperatureKelvin) {
-            this.temperature = new Temperature(temperatureKelvin);
+        public Builder temperatureKelvin(final Optional<Double> temperatureKelvin) {
+            temperatureKelvin.ifPresent(kelvin -> this.temperature = new Temperature(kelvin));
             return this;
         }
 
-        public Builder temperatureCelsius(final double temperatureCelsius) {
-            this.temperature = Temperature.fromCelsius(temperatureCelsius);
+        public Builder temperatureCelsius(final Optional<Double> temperatureCelsius) {
+            temperatureCelsius.ifPresent(celsius -> this.temperature = Temperature.fromCelsius(celsius));
+            return this;
+        }
+
+        public Builder temperatureCelsius(final int celsius) {
+            this.temperature = Temperature.fromCelsius(celsius);
             return this;
         }
 

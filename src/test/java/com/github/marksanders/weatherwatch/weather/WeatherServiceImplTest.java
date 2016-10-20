@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.ZoneId;
 import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +59,7 @@ public class WeatherServiceImplTest {
                         details,
                         main);
 
-        when(openWeatherMapService.getWeatherForCity(OXFORD_ID)).thenReturn(weatherResultJson);
+        when(openWeatherMapService.getWeatherForCity(OXFORD_ID)).thenReturn(Optional.of(weatherResultJson));
         
         Weather weather = uut.getWeatherForCity(OXFORD_ID);
         assertNotNull(weather);
@@ -78,9 +79,9 @@ public class WeatherServiceImplTest {
                         details,
                         main);
 
-        when(openWeatherMapService.getWeatherForCity(HANOI_ID)).thenReturn(weatherResultJson);
+        when(openWeatherMapService.getWeatherForCity(HANOI_ID)).thenReturn(Optional.of(weatherResultJson));
         
-        int temperature = uut.getTemperatureForCity(HANOI_ID);
+        int temperature = uut.getTemperatureForCity(HANOI_ID).get();
         assertEquals(26, temperature);
     }
 

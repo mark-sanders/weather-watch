@@ -1,11 +1,11 @@
 package com.github.marksanders.weatherwatch.api;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class WeatherResultTest {
         WeatherResultJson weatherResult = 
                 new WeatherResultJson("city", 123456, System.currentTimeMillis(), weatherList, null, null);
         
-        assertEquals("Expecting no weather detail", weather1, weatherResult.getWeather());
+        assertEquals("Expecting no weather detail", weather1, weatherResult.getWeather().get());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class WeatherResultTest {
         WeatherResultJson weatherResult = 
                 new WeatherResultJson("city", 123456, System.currentTimeMillis(), Collections.emptyList(), null, null);
 
-        assertNull("Expecting no weather detail", weatherResult.getWeather());
+        assertEquals("Expecting no weather detail", Optional.empty(), weatherResult.getWeather());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class WeatherResultTest {
         WeatherResultJson weatherResult = 
                 new WeatherResultJson("city", 123456, System.currentTimeMillis(), null, null, null);
 
-        assertNull("Expecting no weather detail", weatherResult.getWeather());
+        assertEquals("Expecting no weather detail", Optional.empty(), weatherResult.getWeather());
     }
 
 }
