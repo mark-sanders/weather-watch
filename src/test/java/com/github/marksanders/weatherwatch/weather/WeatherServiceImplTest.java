@@ -41,7 +41,7 @@ public class WeatherServiceImplTest {
         when(timeZoneService.getTimeZoneForCity(HANOI_ID)).thenReturn(VIET_NAM_TZ);
         uut.setTimeZoneService(timeZoneService);
 
-        uut.setOpenWeatherMapService(openWeatherMapService);
+        uut.setOpenWeatherMap(openWeatherMapService);
     }
 
     @Test
