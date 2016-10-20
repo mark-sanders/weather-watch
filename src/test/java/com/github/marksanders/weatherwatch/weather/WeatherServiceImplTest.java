@@ -64,4 +64,24 @@ public class WeatherServiceImplTest {
         assertNotNull(weather);
     }
 
+    @Test
+    public void testVietnamTemperature() {
+        WeatherJson weatherJson = new WeatherJson();
+        WeatherDetailsJson details = new WeatherDetailsJson();
+        WeatherMainJson main = new WeatherMainJson(300.0, 1101, 45, 295.0, 305.0);
+        WeatherResultJson weatherResultJson = 
+                new WeatherResultJson(
+                        "Hanoi", 
+                        HANOI_ID,
+                        System.currentTimeMillis() / 1000L,
+                        Collections.singletonList(weatherJson),
+                        details,
+                        main);
+
+        when(openWeatherMapService.getWeatherForCity(HANOI_ID)).thenReturn(weatherResultJson);
+        
+        int temperature = uut.getTemperatureForCity(HANOI_ID);
+        assertEquals(26, temperature);
+    }
+
 }

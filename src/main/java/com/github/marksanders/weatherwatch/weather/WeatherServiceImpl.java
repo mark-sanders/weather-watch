@@ -85,14 +85,11 @@ public class WeatherServiceImpl implements WeatherService {
         if (weatherResultJson != null) {
             final WeatherJson weatherJson = weatherResultJson.getWeather();
             if (weatherJson != null) {
-                final WeatherDetailsJson detailsJson = weatherResultJson.getDetails();
-                if (detailsJson != null) {
-                    final WeatherMainJson mainJson = weatherResultJson.getMain();
-                    if (mainJson != null) {
-                        Double tempKelvin = mainJson.getTemp();
-                        if (tempKelvin != null) {
-                            return new Temperature(tempKelvin).getCelsius();
-                        }
+                final WeatherMainJson mainJson = weatherResultJson.getMain();
+                if (mainJson != null) {
+                    Double tempKelvin = mainJson.getTemp();
+                    if (tempKelvin != null) {
+                        return new Temperature(tempKelvin).getCelsius();
                     }
                 }
             }
