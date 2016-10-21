@@ -8,16 +8,33 @@ import org.junit.Test;
 
 public class OptionalCoerceWithDefault {
 
-    public static <T> T coerce(
-            final Optional<Object> source,
-            final Class<T> requiredClass,
-            final T other) {
+public static <T> T coerce(
+        final Optional<Object> source,
+        final Class<T> requiredClass,
+        final T other) {
 
-        return source
-                .filter(requiredClass::isInstance)
-                .map(requiredClass::cast)
-                .orElse(other);
-    }
+    return source
+            .filter(requiredClass::isInstance)
+            .map(requiredClass::cast)
+            .orElse(other);
+}
+
+
+@Test
+public void testCoerceStringToString() {
+    Optional<Object> item = Optional.of("string");
+    String result = coerce(item, String.class, "default");
+    assertEquals("string", result);
+}
+
+@Test
+public void testCoerceDoubleToString() {
+    Double source = new Double(123.45);
+    
+    Optional<Object> item = Optional.of(source);
+    String result = coerce(item, String.class, "default");
+    assertEquals("default", result);
+}
 
     @Test
     public void testCoerceEmptyToDouble() {
@@ -50,22 +67,6 @@ public class OptionalCoerceWithDefault {
     @Test
     public void testCoerceEmptyToString() {
         Optional<Object> item = Optional.ofNullable(null);
-        String result = coerce(item, String.class, "default");
-        assertEquals("default", result);
-    }
-    
-    @Test
-    public void testCoerceStringToString() {
-        Optional<Object> item = Optional.of("string");
-        String result = coerce(item, String.class, "default");
-        assertEquals("string", result);
-    }
-
-    @Test
-    public void testCoerceDoubleToString() {
-        Double source = new Double(123.45);
-        
-        Optional<Object> item = Optional.of(source);
         String result = coerce(item, String.class, "default");
         assertEquals("default", result);
     }

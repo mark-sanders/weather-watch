@@ -26,7 +26,8 @@ public class JsonMappingTest {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new Jdk8Module());
 
-        WeatherResultJson weatherResult = mapper.readValue(file, WeatherResultJson.class);
+        WeatherResultJson weatherResult = 
+                mapper.readValue(file, WeatherResultJson.class);
         assertNotNull("Expecting weather result", weatherResult);
         assertEquals("check name", "London", weatherResult.getName());
         assertEquals("check id", 2643743, weatherResult.getId());
